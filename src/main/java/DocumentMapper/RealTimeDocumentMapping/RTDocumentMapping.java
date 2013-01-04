@@ -99,7 +99,7 @@ public class RTDocumentMapping implements iDocumentMapper {
     }
 
     private void sendShutdownToReduceQueue() {
-        for (int i = 0; i < Integer.parseInt(Props.getProperty("QueueNumber")); i++) {
+        for (int i = 0; i < Integer.parseInt(Props.getProperty("QueueNumber")); ++i) {
             String processingQueue = Props.getProperty("ProcessingQueue" + String.valueOf(i));
             DBObject insertionQuery = new BasicDBObject();
             insertionQuery.put("ProcessingId", "SHUTDOWN");

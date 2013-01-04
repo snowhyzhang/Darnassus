@@ -140,6 +140,13 @@ public class MongoDBUtil {
         collection.remove(query);
     }
 
+    public void removeAll(String collectionName){
+        if (!isConnected){
+            getConnection();
+        }
+        DBCollection collection = mongoDB.getCollection(collectionName);
+    }
+
     public void drop(String collectionName){
         if (!isConnected){
             getConnection();
@@ -147,6 +154,7 @@ public class MongoDBUtil {
         DBCollection collection = mongoDB.getCollection(collectionName);
         collection.drop();
     }
+
 
     public int getCollectionSize(String collectionName){
         if (isConnected){
