@@ -58,7 +58,7 @@ public class RTDocumentMapping implements iDocumentMapper {
                 String documentName = (String)dbObject.get("DocumentName");
                 if (documentName.equalsIgnoreCase("SHUTDOWN")){
                     shutdownFlag = true;
-                    processingShutMessage(dbObject);
+                    processingShutdownMessage(dbObject);
                     System.out.println("Processing is SHUTDOWN");
                 } else {
                     ProcessMapping(dbObject);
@@ -90,7 +90,7 @@ public class RTDocumentMapping implements iDocumentMapper {
         dbUtil.update(queryUpdate, updateDocumentMapperStatus, documentQueue);
     }
 
-    private void processingShutMessage(DBObject dbObject) {
+    private void processingShutdownMessage(DBObject dbObject) {
         DBObject updateQuery = new BasicDBObject("Processed", "Y");
         updateQuery = new BasicDBObject().append("$set", updateQuery);
         dbUtil.update(dbObject, updateQuery, documentQueue);
@@ -113,6 +113,6 @@ public class RTDocumentMapping implements iDocumentMapper {
         query.put("Processed", "N");
         DBObject field = new BasicDBObject();
         field.put("DocumentContent", 0);
-        return dbUtil.findAll(query, documentQueue);
+        return dbUtil.findAll(query, field, documentQueue);
     }
 }

@@ -46,7 +46,7 @@ public class DocumentMapperTest extends TestCase {
 
         DBObject queryReduceShutdown = new BasicDBObject();
         queryReduceShutdown.put("ProcessingId", "SHUTDOWN");
-        DBObject testReduceShutdown = dbUtil.findOne(queryShutdown, ProcessingQueue);
+        DBObject testReduceShutdown = dbUtil.findOne(queryReduceShutdown, ProcessingQueue);
         assertEquals("N", (String)testReduceShutdown.get("Processed"));
     }
 
